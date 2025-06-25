@@ -1,0 +1,36 @@
+{
+  "test": [
+    {
+      "kundennummer": "10001",
+      "name": "Bäckerei Muster",
+      "preisliste": "148",
+      "top10": [
+        {
+          "artikelnummer": "34265",
+          "artikelbezeichnung": "Weltmeisterbrötchen",
+          "absatz": 100
+        },
+        {
+          "artikelnummer": "12345",
+          "artikelbezeichnung": "Kaiserbrötchen",
+          "absatz": 50
+        },
+        {
+          "artikelnummer": "67890",
+          "artikelbezeichnung": "Roggenmischbrot",
+          "absatz": 20
+        },
+        {
+          "artikelnummer": "98765",
+          "artikelbezeichnung": "Croissant",
+          "absatz": 10
+        },
+        {
+          "artikelnummer": "24680",
+          "artikelbezeichnung": "Dinkelbrot",
+          "absatz": 15
+        }
+      ]
+    }
+  ]
+}
