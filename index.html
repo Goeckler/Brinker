@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brinker Außendienst</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/favicon.png">
+</head>
+<body>
+  <div id="login-screen">
+    <h1>Login</h1>
+    <input type="text" id="username" placeholder="Nachname">
+    <input type="password" id="password" placeholder="Passwort">
+    <button id="login-btn">Anmelden</button>
+  </div>
+
+  <div id="form-container" style="display:none;">
+    <h2>Kundenauswahl</h2>
+    <select id="kunden-select"></select>
+    <h3>Top 5 Artikel (Absatz)</h3>
+    <ul id="top-5-artikel"></ul>
+    <h3>Neue Preisliste</h3>
+    <select id="neue-preisliste"></select>
+    <h3>Verkaufschancen</h3>
+    <div id="verkauf-selects"></div>
+    <h3>Kommentar</h3>
+    <textarea id="kommentar" rows="4" cols="50"></textarea>
+    <h3>Umsatzvergleich</h3>
+    <div id="umsatzvergleich"></div>
+    <button id="speichern-btn">Speichern</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

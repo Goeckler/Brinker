@@ -1,0 +1,26 @@
+[
+  {
+    "id": "A001",
+    "name": "Roggenbrot",
+    "kategorie": "Brot",
+    "preis_alt": 2.5,
+    "preis_neu": 2.7,
+    "absatz": 100
+  },
+  {
+    "id": "A002",
+    "name": "Buttercroissant",
+    "kategorie": "Snacks",
+    "preis_alt": 1.2,
+    "preis_neu": 1.3,
+    "absatz": 150
+  },
+  {
+    "id": "A003",
+    "name": "Vollkornbrötchen",
+    "kategorie": "Brot",
+    "preis_alt": 0.4,
+    "preis_neu": 0.45,
+    "absatz": 300
+  }
+]

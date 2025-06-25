@@ -1,0 +1,17 @@
+[
+  {
+    "id": "K001",
+    "name": "Bäckerei Müller",
+    "status": "aktiv"
+  },
+  {
+    "id": "K002",
+    "name": "Bäckerei Schröder",
+    "status": "inaktiv"
+  },
+  {
+    "id": "K003",
+    "name": "Feinkost Becker",
+    "status": "potenzial"
+  }
+]
