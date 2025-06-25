@@ -1,4 +1,3 @@
-
 const password = "Start123!";
 let kunden = {};
 let artikel = [];
@@ -182,4 +181,16 @@ function nextCustomer() {
   } else {
     alert("Alle Kunden bearbeitet.");
   }
+}
+
+function loadPreislisten() {
+  const pl = ["TK Stufe 1", "TK Stufe 2", "TK Stufe 3", "TK Stufe 4", "TK Stufe 5", "TK Stufe 6"];
+  const select = document.getElementById("preisliste-neu");
+  select.innerHTML = "";
+  pl.forEach(p => {
+    const option = document.createElement("option");
+    option.textContent = p;
+    option.value = p;
+    select.appendChild(option);
+  });
 }
