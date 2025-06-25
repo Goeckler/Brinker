@@ -1,6 +1,7 @@
 const password = "Start123!";
 let kunden = {};
 let artikel = [];
+let preise = {};
 let selectedChances = [];
 let currentUser = "";
 
@@ -12,11 +13,13 @@ function login() {
   if (pw === password) {
     Promise.all([
       fetch('kunden.json').then(res => res.json()),
-      fetch('artikel.json').then(res => res.json())
+      fetch('artikel.json').then(res => res.json()),
+      fetch('preise_vergleich.json').then(res => res.json())
     ])
-    .then(([kundenData, artikelData]) => {
+    .then(([kundenData, artikelData, preiseData]) => {
       kunden = kundenData;
       artikel = artikelData;
+      preise = preiseData;
       if (!(user in kunden)) {
         showError("Kein Zugriff für diesen Nutzer.");
         return;
@@ -74,6 +77,7 @@ function updateCustomerView() {
   if (!selected || !selected.value) {
     document.getElementById("preisliste-aktuell").value = "";
     document.getElementById("top-article-container").innerHTML = "";
+    document.getElementById("preisvergleich").innerHTML = "";
     return;
   }
 
@@ -98,13 +102,15 @@ function updateCustomerView() {
     input.style.background = "#f0f0f0";
     input.style.border = "1px solid #ccc";
     input.value = kunde.top10[i] ? `${kunde.top10[i].artikelnummer} – ${kunde.top10[i].artikelbezeichnung}` : "";
+    input.dataset.artikelnummer = kunde.top10[i] ? kunde.top10[i].artikelnummer : "";
+    input.dataset.absatz = kunde.top10[i] ? kunde.top10[i].absatz : "0";
 
     wrapper.appendChild(label);
     wrapper.appendChild(input);
     container.appendChild(wrapper);
   }
 
-  buildVerkaufschancenDropdowns();
+  updatePriceComparison();
 }
 
 function loadPreislisten() {
@@ -117,6 +123,42 @@ function loadPreislisten() {
     option.value = p;
     select.appendChild(option);
   });
+  select.addEventListener("change", updatePriceComparison);
+}
+
+function updatePriceComparison() {
+  const stufe = document.getElementById("preisliste-neu").value;
+  const altPL = document.getElementById("preisliste-aktuell").value;
+  const inputs = document.querySelectorAll("#top-article-container input");
+  let sumAlt = 0, sumNeu = 0;
+
+  inputs.forEach(input => {
+    const art = input.dataset.artikelnummer;
+    const menge = parseFloat(input.dataset.absatz || "0");
+
+    if (preise[art]) {
+      const pAlt = preise[art].alt[altPL];
+      const pNeu = preise[art].neu[stufe];
+      if (pAlt && pNeu) {
+        sumAlt += pAlt * menge;
+        sumNeu += pNeu * menge;
+      }
+    }
+  });
+
+  const diff = sumNeu - sumAlt;
+  const percent = sumAlt > 0 ? ((diff / sumAlt) * 100).toFixed(2) : "0.00";
+  const farbe = diff > 0 ? "green" : diff < 0 ? "red" : "gray";
+
+  const html = `
+    <div style="margin-top:1rem; border:1px solid #ccc; padding:1rem;">
+      <strong>Preisvergleich:</strong><br/>
+      Umsatz alt: ${sumAlt.toFixed(2)} €<br/>
+      Umsatz neu: ${sumNeu.toFixed(2)} €<br/>
+      Differenz: <span style="color:${farbe}">${diff.toFixed(2)} € (${percent}%)</span>
+    </div>
+  `;
+  document.getElementById("preisvergleich").innerHTML = html;
 }
 
 function buildVerkaufschancenDropdowns() {
